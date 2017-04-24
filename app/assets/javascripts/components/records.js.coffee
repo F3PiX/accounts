@@ -9,7 +9,19 @@
       React.DOM.h2
         className: 'title'
         'Records'
+      React.DOM.table
+        className: 'table table-bordered'
+        React.DOM.thead null,
+          React.DOM.tr null,
+            React.DOM.th null, 'Date'
+            React.DOM.th null, 'Title'
+            React.DOM.th null, 'Amount'
+        React.DOM.tbody null,
+          for record in @state.records
+            React.createElement Record, key: record.id, record: record
 
+
+    #### STEP 3: Add table and display each record (see also record.js.coffee)
     #### STEP 2: init class with init state and props : GetInitialState + GetDefaultProps
     ####  STEP 1 : Create class + render method
 # Each component requires a render method.
