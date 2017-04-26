@@ -10,15 +10,28 @@
     records.push record
     @setState records: records
 
+  credits: ->
+    credits = @state.records.filter (val) -> val.amount >= 0
+    credits.reduce ((prev, curr) ->
+      prev + parseFloat(curr.amount)
+    ), 0
+  debits: ->
+    debits = @state.records.filter (val) -> val.amount < 0
+    debits.reduce ((prev, curr) ->
+      prev + parseFloat(curr.amount)
+    ), 0
+  balance: ->
+    @debits() + @credits()
+
   render: ->
     React.DOM.div
       className: 'records'
       React.DOM.h2
         className: 'title'
         'Records'
-      React.createElement AmountBox, type: 'succes', amount: 5, text: 'Credit'
-      React.createElement AmountBox, type: 'danger', amount: -3, text: 'Debit'
-      React.createElement AmountBox, type: 'info', amount: 5-3, text: 'Balance'
+      React.createElement AmountBox, type: 'succes', amount: @credits(), text: 'Credit'
+      React.createElement AmountBox, type: 'danger', amount: @debits(), text: 'Debit'
+      React.createElement AmountBox, type: 'info', amount: @balance(), text: 'Balance'
       React.createElement RecordForm, handleNewRecord: @addRecord
       React.DOM.hr null
 
@@ -33,6 +46,8 @@
           for record in @state.records
             React.createElement Record, key: record.id, record: record
 
+
+    #### STEP 5: Add debit, credit and balance
     #### STEP 4: Add 'create a new record' feature (controller action, form component)
     #### STEP 3: Add table and display each record (see also record.js.coffee)
     #### STEP 2: init class with init state and props : GetInitialState + GetDefaultProps
