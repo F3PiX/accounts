@@ -16,6 +16,9 @@
       React.DOM.h2
         className: 'title'
         'Records'
+      React.createElement AmountBox, type: 'succes', amount: 5, text: 'Credit'
+      React.createElement AmountBox, type: 'danger', amount: -3, text: 'Debit'
+      React.createElement AmountBox, type: 'info', amount: 5-3, text: 'Balance'
       React.createElement RecordForm, handleNewRecord: @addRecord
       React.DOM.hr null
 
