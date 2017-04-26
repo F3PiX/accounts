@@ -1,14 +1,24 @@
 @Records = React.createClass
   getInitialState: ->
     records: @props.data
+
   getDefaultProps: ->
     records: []
+
+  addRecord: (record) ->
+    records = @state.records.slice()
+    records.push record
+    @setState records: records
+
   render: ->
     React.DOM.div
       className: 'records'
       React.DOM.h2
         className: 'title'
         'Records'
+      React.createElement RecordForm, handleNewRecord: @addRecord
+      React.DOM.hr null
+
       React.DOM.table
         className: 'table table-bordered'
         React.DOM.thead null,
@@ -20,7 +30,7 @@
           for record in @state.records
             React.createElement Record, key: record.id, record: record
 
-
+    #### STEP 4: Add 'create a new record' feature (controller action, form component)
     #### STEP 3: Add table and display each record (see also record.js.coffee)
     #### STEP 2: init class with init state and props : GetInitialState + GetDefaultProps
     ####  STEP 1 : Create class + render method
