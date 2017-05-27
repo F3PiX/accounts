@@ -10,9 +10,9 @@
   handleEdit: (e) ->
     e.preventDefault()
     data =
-      title: @refs.title.value
-      date: @refs.date.value
-      amount: @refs.amount.value
+      title: ReactDOM.findDOMNode(@refs.title).value
+      date: ReactDOM.findDOMNode(@refs.date).value
+      amount: ReactDOM.findDOMNode(@refs.amount).value
     #jQuery does not have a $.put (nor a $.delete) shortcut method
     $.ajax
       method: 'PUT'
